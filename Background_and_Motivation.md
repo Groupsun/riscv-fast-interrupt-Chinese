@@ -6,7 +6,8 @@
 
 CLIC还支持一个新的可选向量硬件中断（Selective Hardware Vectoring）特性来允许用户对每个中断进行优化：实现为快速响应抑或是更小的代码长度。
 
-虽然现在的CLIC仅提供单个硬件线程（RISC-V-compatible hardware threads，harts）内的中断控制，在CLIC未来的扩展中可能会加入对核内多个硬件线程所提供的定向中断支持，正如它的名字一样（且CLIC听起来比HLIC或者HIC更好）。
+> 虽然现在的CLIC仅提供单个硬件线程（RISC-V-compatible hardware threads，harts）内的中断控制，在CLIC未来的扩展中可能会加入对核内多个硬件线程所提供的定向中断支持，正如它的名字一样（且CLIC听起来比HLIC或者HIC更好）。
+>
 
 ## 现有的RISC-V中断系统
 
@@ -14,9 +15,11 @@ CLIC还支持一个新的可选向量硬件中断（Selective Hardware Vectoring
 
 `xtvec`寄存器定义了中断向量表的中断模式以及基地址。WARL（“Write Any Values, Reads Legal Values”，写任意值，读合法值）寄存器`xtvec`的低位用来指示当前所支持的中断模型。原生的xtvec寄存器中中断模型的设定只有两种（*00以及*01），表示跳转到中断服务程序将使用非向量或者向量的模式。而高位则保存有4字节（或者更大）对齐的表头基地址（对于非向量模式，这是所有中断服务程序的共同入口；对于向量模式，这是中断向量表的基地址）。
 
-WARL表示“Write Any Values, Reads Legal Values”，也就是说可以尝试写入任何值但是只有支持的值可以被实际得写入。
+> WARL表示“Write Any Values, Reads Legal Values”，也就是说可以尝试写入任何值但是只有支持的值可以被实际得写入。
+>
 
-通过将`mtvec`最低两位的值设置为保留值（*11）可以启用CLIC模式。
+> 通过将`mtvec`最低两位的值设置为保留值（*11）可以启用CLIC模式。
+>
 
 ## 对比CLIC与PLIC
 
